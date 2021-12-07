@@ -1,11 +1,13 @@
-import firebase from '../components/firebase/initializeFirebase'
+import myfirebase from '../components/firebase/initializeFirebase'
 
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 
-
+myfirebase()
 
 const  SearchDatabase = async (email) =>{
-    let db = firebase(true)
-    
+    //let db = firebase(true)
+    let db = firebase.firestore()
     //email should be a string
     //console.log(db) 
     // async function to search for user in database
