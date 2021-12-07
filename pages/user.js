@@ -3,8 +3,10 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useState, useEffect } from 'react'
 import Link from "next/link";
-
+import 'bootstrap/dist/css/bootstrap.css'; // Add this line
 import styles from '../styles/user.module.css'
+
+
 
 const isMarkedAttendance = async (id, WorkshopNumber) => {
 
@@ -115,6 +117,7 @@ export default  function User(){
    
         let newBtn = document.createElement('button')
         newBtn.id = `btn-${i}`
+        newBtn.className = "btn btn-primary"
         newBtn.addEventListener ('click', async function(e){
           MarkAttendance(ID,i)
           e.currentTarget.disabled = true
@@ -133,9 +136,10 @@ export default  function User(){
     return(
 
         <div className={styles['main-container']}>
+
           <h1 className={styles['title-container']} >Hello {
           userRef?userRef.Name: userRef } </h1>
-          <div id = 'buttons'>
+          <div id = 'buttons' className={styles["buttons"]}>
             
           </div>
         </div>

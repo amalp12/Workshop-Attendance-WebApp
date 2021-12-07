@@ -1,14 +1,23 @@
 
 
 .main-container {
-    background-color: rgb(186, 186, 206,0.3);
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 10% 10%;
+    border-radius: 0.25rem;
+    min-height: 100vh;
+    
+    
+    
 }
 
 .title-container {
 
     text-align: center;
-    color: whitesmoke;
+    color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 .conatiner-404{
     text-align: center;
@@ -18,3 +27,11 @@
 .here-link{
     color: red;
 }
+.buttons{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10%;
+    justify-content: center;
+    
+}
+

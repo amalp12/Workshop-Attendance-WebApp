@@ -1,0 +1,20 @@
+
+
+
+
+.main-container {
+   
+    display: flex; 
+    
+    justify-content: center;
+    background-color: black;
+    vertical-align: middle;
+}
+.thebox{
+    
+
+    border-radius: 0.4rem;
+    background-color: white;
+    padding: 2rem 2rem;
+    
+}

@@ -12,7 +12,7 @@ const ServerTime = async () => {
     console.log(time.datetime);
     const timeNow = new Date( time.datetime);
     //console.log(timeNow.getTime()); in int
-    console.log(timeNow); 
+    //console.log(timeNow); 
     return timeNow
 }
 	
