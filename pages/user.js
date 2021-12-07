@@ -6,7 +6,8 @@ import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.css'; // Add this line
 import styles from '../styles/user.module.css'
 
-
+import ServerTime from "../components/ServerTime";
+import InInterval from "../components/InInterval";
 
 const isMarkedAttendance = async (id, WorkshopNumber) => {
 
@@ -35,7 +36,15 @@ const MarkAttendance =(id,WorkshopNumber) => {
 const showButtonText = async (id, WorkshopNumber) => {
   const marked = await isMarkedAttendance(id, WorkshopNumber)
   const btn =  document.getElementById(`btn-${WorkshopNumber}`)
+  const timeNow = await ServerTime()
+  const rightInterval = await InInterval(WorkshopNumber, timeNow)
   //debugger
+  if(rightInterval===false)
+  {
+    btn.disabled = true
+    btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
+    return 
+  }
   if(marked){
     
     btn.disabled = true

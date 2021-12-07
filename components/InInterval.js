@@ -1,14 +1,14 @@
 import firebase from 'firebase'
-import timeData from '../private/timeData.json'
-import SearchDatabase from './SearchDatabase'
 
-const InInterval = async (WorkshopNumber, currentTime ) => {
+
+const InInterval = async (WorkshopNumber, currTime ) => {
     const db = firebase.firestore();
-    const docRef =   (await db.collection('times').doc(`Workshop${WorkshopNumber}`).get().then()).data();
+    const docRef = await db.collection('times').doc(`Workshop${WorkshopNumber}`).get();
     
-    const startTime = new Date(docRef.Start);
-    const endTime = new Date(docRef.End);
-    const currentTime = new Date(currentTime);
+    const startTime = new Date(docRef.data().Start);
+    const endTime = new Date(docRef.data().End);
+    const currentTime = new Date(currTime);
+    //debugger
     if(currentTime.getTime() >= startTime.getTime() && currentTime.getTime() <= endTime.getTime()){
         return true;
     }
