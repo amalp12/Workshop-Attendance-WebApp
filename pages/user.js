@@ -65,7 +65,7 @@ const showButtonText = async (id, WorkshopNumber) => {
 const showAllButtonsText = async(id) => {
   for(let i =1 ; i<=8; i++)
   {
-    await showButtonText(id,i)
+     showButtonText(id,i)
   }
 }
 
@@ -133,7 +133,7 @@ export default  function User(){
       newBtn.addEventListener ('click', async function(e){
         MarkAttendance(router.query.id,i)
         e.currentTarget.disabled = true
-        await showButtonText(router.query.id,i)
+        showButtonText(router.query.id,i)
       })
       
       buttons.appendChild(newBtn)
