@@ -3,7 +3,7 @@ import Router from 'next/router'
 import {useState} from 'react'
 import Loader from '../components/Loader'
 import NProgress from 'nprogress'
-import getConfig from 'next/config';
+//import getConfig from 'next/config';
 
 function MyApp({ Component, pageProps }) 
 {

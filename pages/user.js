@@ -102,16 +102,26 @@ export default  function User(){
     if(!router.isReady) return;
     const getData = async () => {
       const ref = await  getDataByID(router.query.id)
+      const title = document.getElementById('title-container')
+      if(ref === null)
+      {
+        return
+      }
+      title.innerHTML = `Hello, ${ref.Name}`
       //console.log(ref)
-      return ref
+      
     }
-    const ref = getData()
-    setuserRef(ref)
-
+    getData()
+    //setuserRef(ref)
+    
   }, [router.isReady] )
 
   useEffect(() => {
     const buttons = document.getElementById('buttons')
+    if(buttons === null)
+    {
+      return
+    }
     buttons.innerHTML=''
     for(let i =1 ; i<=8; i++)
     {
@@ -161,7 +171,7 @@ export default  function User(){
 
         <div className={styles['main-container']}>
 
-          <h1 className={styles['title-container']} >Hello {
+          <h1 id = "title-container" className={styles['title-container']} >Hello {
           userRef?userRef.Name: userRef } </h1>
           <div id = 'buttons' className={styles["buttons"]}>
             

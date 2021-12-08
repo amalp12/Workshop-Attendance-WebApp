@@ -1,13 +1,21 @@
 .loaderContainer{
-    display: flex;
-    justify-content: center;
-    top: 0;
-    height: 100vh;
-    background-color: black;
+    position: fixed;
+    width: 60vh;
+    height: 60vh;
+    top: 50%;
+    left: 50%;
+    margin-top: -30vh; /* Negative half of height. */
+    margin-left: -30vh; /* Negative half of width. */
+    z-index: 100;
 }
 
 .loaderContainer img {
+    align-self: center;
     display: inline-block;
+    width: 50vh;
     margin: auto;
-    width: 200px;
+    border-radius: 1rem;
+    background-color: white;
+
+    
 }
