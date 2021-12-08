@@ -1,8 +1,9 @@
 .loaderContainer{
     display: flex;
-    position: absolute;
+    justify-content: center;
     top: 0;
     height: 100vh;
+    background-color: black;
 }
 
 .loaderContainer img {

@@ -31,7 +31,7 @@ export default function Index(){
             <form className ="form-signin" id='submit-form'  onSubmit={async (e) => {
               e.preventDefault()
               const form = document.getElementById('submit-form')
-              console.log(form.email.value) 
+              //console.log(form.email.value) 
               if(form.email.value === ''){
                 alert('Please enter your registered mail id')
                 return
@@ -45,7 +45,9 @@ export default function Index(){
               router.push({ pathname: './user', query:{id : searchResult.id}}, '/user')
 
             }}>
-              <img className="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
+              <h1 className="h3 mb-3 font-weight-normal">Transformer Epiphany </h1>
+              <h1 className="h3 mb-3 font-weight-normal"> Workshop </h1>
+              <img className="mb-4" src="WorkshopLogo.jpeg" alt="" width="150" height="150"/>
               <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
               <label htmlFor="inputEmail" className="h6 sr-only"> Registered Email address </label>
               

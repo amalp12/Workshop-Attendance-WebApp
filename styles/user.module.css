@@ -19,14 +19,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 }
-.conatiner-404{
-    text-align: center;
-    color: whitesmoke;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.here-link{
-    color: red;
-}
+
 .buttons{
     display: grid;
     grid-template-columns: 1fr;

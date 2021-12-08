@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import { useState, useEffect } from 'react'
-import Link from "next/link";
+import NotFound404 from "./404";
 import 'bootstrap/dist/css/bootstrap.css'; // Add this line
 import styles from '../styles/user.module.css'
 
@@ -39,6 +39,11 @@ const showButtonText = async (id, WorkshopNumber) => {
   const timeNow = await ServerTime()
   const rightInterval = await InInterval(WorkshopNumber, timeNow)
   //debugger
+
+  if (btn===null)
+  {
+    return
+  }
   if(rightInterval===false)
   {
     btn.disabled = true
@@ -51,6 +56,7 @@ const showButtonText = async (id, WorkshopNumber) => {
     btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
   }
   else{
+    btn.disabled = false
     btn.innerHTML =  `Click Here to Mark Attendance for Workshop ${WorkshopNumber}`
   }
 
@@ -80,9 +86,8 @@ export default  function User(){
   const ID = router.query.id
   if(ID === undefined){
     return ( 
-    <div className={styles["conatiner-404"]}>
-      <h1>404 NOT Found  Click <Link href="/"><a className={styles['here-link']}> here </a></Link> to go back to Home Page</h1>
-    </div>)
+    <NotFound404/>
+    )
   }
   
   useEffect(()=>{
@@ -99,7 +104,7 @@ export default  function User(){
   },[])
   
   
-  console.log(ID)
+  //console.log(ID)
 
 
     const [userRef, setuserRef] = useState(null)
@@ -109,7 +114,7 @@ export default  function User(){
     useEffect(async () => {
      
       const ref = await  getDataByID(ID)
-      console.log(ref)
+      //console.log(ref)
 
       setuserRef(ref)
 
@@ -125,6 +130,7 @@ export default  function User(){
       {
    
         let newBtn = document.createElement('button')
+        newBtn.disabled = true
         newBtn.id = `btn-${i}`
         newBtn.className = "btn btn-primary"
         newBtn.addEventListener ('click', async function(e){

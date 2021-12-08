@@ -36,22 +36,24 @@ const addAllIfDoesntExist = async (data) => {
 
 
 export default function Admin(){
-    console.log(data)
+    //console.log(data)
     /*
     useEffect(async ()=>{
         await addAllIfDoesntExist(data);
     },[])
     */
+   // enable disabled buttons to use
+
     return(
   
         <div className={styles['main-container']}>
           <h1 className={styles['title-container']} >Admin  </h1>
-            <button onClick={async()=>{await addAllIfDoesntExist(data)}}>Add all to Database</button>
-            <button onClick={()=>{
+            <button disabled = "true" onClick={async()=>{await addAllIfDoesntExist(data)}}>Add all to Database</button>
+            <button disabled = "true" onClick={()=>{
                 const time = ServerTime()
-                console.log(time)
+                //console.log(time)
                 }}>Get Server Time</button>
-            <button onClick={async ()=>{ await AddWorkshopTimes() }}>Add Workshop Times</button>
+            <button disabled = "true" onClick={async ()=>{ await AddWorkshopTimes() }}>Add Workshop Times</button>
         
         </div>
       )

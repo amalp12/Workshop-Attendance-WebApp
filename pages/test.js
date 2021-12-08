@@ -1,6 +1,6 @@
 
 import 'bootstrap/dist/css/bootstrap.css'; // Add this line
-import Head from 'next/head';
+
 
 export default function Test(){
 

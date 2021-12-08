@@ -28,7 +28,7 @@ export default function Home(){
         <form className ="form-signin" id='submit-form'  onSubmit={async (e) => {
           e.preventDefault()
           const form = document.getElementById('submit-form')
-          console.log(form.email.value) 
+          //console.log(form.email.value) 
           if(form.email.value === ''){
             alert('Please enter your registered mail id')
             return

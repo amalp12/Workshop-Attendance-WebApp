@@ -7,14 +7,14 @@ import 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDIorbFxjEoJYtCJTAk3pAaKuvquCz6ePE",
-  authDomain: "attendance-sheet-d3b34.firebaseapp.com",
-  databaseURL: "https://attendance-sheet-d3b34-default-rtdb.firebaseio.com",
-  projectId: "attendance-sheet-d3b34",
-  storageBucket: "attendance-sheet-d3b34.appspot.com",
-  messagingSenderId: "835469214588",
-  appId: "1:835469214588:web:6cd576a614c68c8d4f1af9",
-  measurementId: "G-28TBLRBSRP"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId:  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID ,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID ,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID 
 };
 
 // Initialize Firebase
