@@ -7,7 +7,7 @@ import Head from 'next/head'
 import styles from '../styles/index.module.css'
 
 import 'bootstrap/dist/css/bootstrap.css'; // Add this line
-
+import Image from 'next/image';
 
 import SearchDatabase from '../components/SearchDatabase'
 
@@ -47,7 +47,7 @@ export default function Index(){
             }}>
               <h1 className="h3 mb-3 font-weight-normal">Transformer Epiphany </h1>
               <h1 className="h3 mb-3 font-weight-normal"> Workshop </h1>
-              <img className="mb-4" src="WorkshopLogo.jpeg" alt="" width="150" height="150"/>
+              <Image className="mb-4" src="/WorkshopLogo.jpeg" alt="" width="150" height="150"/>
               <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
               <label htmlFor="inputEmail" className="h6 sr-only"> Registered Email address </label>
               

@@ -83,12 +83,7 @@ const getDataByID = async (id) => {
 
 export default  function User(){
   const router = useRouter()
-  const ID = router.query.id
-  if(ID === undefined){
-    return ( 
-    <NotFound404/>
-    )
-  }
+  const [userRef, setuserRef] = useState(null)
   
   useEffect(()=>{
     window.onbeforeunload = (event) => {
@@ -99,52 +94,66 @@ export default  function User(){
       if (e) {
         e.returnValue = ''; // Legacy method for cross browser support
       }
-      return ''; // Legacy method for cross browser support
+     //return 'Are you sure you want to leave?';
     };
   },[])
+
+  useEffect( () => {
+    if(!router.isReady) return;
+    const getData = async () => {
+      const ref = await  getDataByID(router.query.id)
+      //console.log(ref)
+      return ref
+    }
+    const ref = getData()
+    setuserRef(ref)
+
+  }, [router.isReady] )
+
+  useEffect(() => {
+    const buttons = document.getElementById('buttons')
+    buttons.innerHTML=''
+    for(let i =1 ; i<=8; i++)
+    {
+ 
+      let newBtn = document.createElement('button')
+      newBtn.disabled = true
+      newBtn.id = `btn-${i}`
+      newBtn.className = "btn btn-primary"
+      newBtn.addEventListener ('click', async function(e){
+        MarkAttendance(router.query.id,i)
+        e.currentTarget.disabled = true
+        await showButtonText(router.query.id,i)
+      })
+      
+      buttons.appendChild(newBtn)
+    }
+
+    document.onload = showAllButtonsText(router.query.id)
+    
+  }, [router.isReady])
+  const ID = router.query.id
+  if(ID === undefined){
+    return ( 
+    <NotFound404/>
+    )
+  }
+  
   
   
   //console.log(ID)
 
 
-    const [userRef, setuserRef] = useState(null)
+    
     //const userRef =  async () => {return}
     //console.log(userRef)
 
-    useEffect(async () => {
-     
-      const ref = await  getDataByID(ID)
-      //console.log(ref)
-
-      setuserRef(ref)
-
-    }, [] )
+    
 
 
 
    
-    useEffect(() => {
-      const buttons = document.getElementById('buttons')
-      buttons.innerHTML=''
-      for(let i =1 ; i<=8; i++)
-      {
-   
-        let newBtn = document.createElement('button')
-        newBtn.disabled = true
-        newBtn.id = `btn-${i}`
-        newBtn.className = "btn btn-primary"
-        newBtn.addEventListener ('click', async function(e){
-          MarkAttendance(ID,i)
-          e.currentTarget.disabled = true
-          await showButtonText(ID,i)
-        })
-        
-        buttons.appendChild(newBtn)
-      }
-
-      document.onload = showAllButtonsText(ID)
-      
-    }, [])
+    
 
    
   
