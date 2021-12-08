@@ -1,6 +1,6 @@
 
 import styles from '../styles/admin.module.css'
-import data from '../private/data.json'
+//import data from '../private/data.json'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import SearchDatabase from '../components/SearchDatabase';
@@ -9,7 +9,7 @@ import ServerTime from '../components/ServerTime';
 
 const addAllIfDoesntExist = async (data) => {
     const db = firebase.firestore();
-    const docRef = await db.collection('users');
+    const docRef =  db.collection('users');
     let condition
    for(var key in data){
        condition = await SearchDatabase(key)

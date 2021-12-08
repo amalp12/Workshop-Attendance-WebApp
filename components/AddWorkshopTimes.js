@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import timeData from '../private/timeData.json'
+//import timeData from '../private/timeData.json'
 import SearchDatabase from './SearchDatabase'
 
 const AddWorkshopTimes = async () => {
