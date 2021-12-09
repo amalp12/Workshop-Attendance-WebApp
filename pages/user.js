@@ -8,7 +8,7 @@ import styles from '../styles/user.module.css'
 
 import ServerTime from "../components/ServerTime";
 import InInterval from "../components/InInterval";
-
+import initializeFirebase from "../components/firebase/initializeFirebase";
 
 
 
@@ -36,7 +36,7 @@ const isMarkedAttendance =  ( WorkshopNumber,currentUserData) => {
 const MarkAttendance =(id,WorkshopNumber) => {
   let obj ={}
   obj["Workshop"+WorkshopNumber] = 1
-  const db = firebase.firestore()
+  const db = initializeFirebase(true)
   db.collection('users').doc(id).update(
     obj
     )
@@ -58,17 +58,21 @@ const MarkAttendance =(id,WorkshopNumber) => {
   if(rightInterval===false)
   {
     btn.disabled = true
-    btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
+    btn.insertAdjacentHTML('afterbegin',`<p>Workshop ${WorkshopNumber} has not started yet </p>`)
+    //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
     return 
   }
+  
   if(marked){
     
     btn.disabled = true
-    btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
+    btn.insertAdjacentHTML('afterbegin', `<p>Sucessfully Marked Attendance for Workshop ${WorkshopNumber}</p>` )
+    //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
   }
   else{
     btn.disabled = false
-    btn.innerHTML =  `Click Here to Mark Attendance for Workshop ${WorkshopNumber}`
+    btn.insertAdjacentHTML('afterbegin',`<p>Click Here to Mark Attendance for Workshop ${WorkshopNumber}</p>`)
+    //btn.innerHTML =  `Click Here to Mark Attendance for Workshop ${WorkshopNumber}`
   }
 
 }
@@ -87,7 +91,7 @@ const showAllButtonsText = async(id, currentUserData, timeNow) => {
 const getDataByID = async (id) => {
   
   if (id === undefined) {return null}
-  const db = firebase.firestore()
+  const db = initializeFirebase(true)
   const userRef = await db.collection('users').doc(id).get()
   return userRef.data()
   
@@ -200,6 +204,11 @@ export default  function User(props){
           <div id = 'buttons' className={styles["buttons"]}>
             
           </div>
+
+
+
+
+          
         </div>
 
       )
@@ -212,7 +221,8 @@ export default  function User(props){
 User.getInitialProps =  async (ctx) => {
   //debugger
   const  id  = ctx.query.id
-  const db = firebase.firestore()
+  
+  const db = initializeFirebase(true)
   const UserData = await db.collection('users').doc(id).get()
   const timeNow = await ServerTime()
   const currentUserData =  UserData.data()

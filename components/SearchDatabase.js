@@ -3,11 +3,11 @@ import myfirebase from '../components/firebase/initializeFirebase'
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-myfirebase()
+
 
 const  SearchDatabase = async (email) =>{
     //let db = firebase(true)
-    let db = firebase.firestore()
+    let db = myfirebase(true)
     //email should be a string
     //console.log(db) 
     // async function to search for user in database
@@ -15,7 +15,7 @@ const  SearchDatabase = async (email) =>{
         (snapshot) => {
         // the below searchResult is a different varialbe than the one above
         let searchResult = null
-        let flag = false
+ 
         //console.log(snapshot.docs)
         snapshot.docs.every(
         doc => { 
