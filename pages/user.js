@@ -9,18 +9,29 @@ import styles from '../styles/user.module.css'
 import ServerTime from "../components/ServerTime";
 import InInterval from "../components/InInterval";
 
-const isMarkedAttendance = async (id, WorkshopNumber) => {
 
-  const db = firebase.firestore()
-  const got = await db.collection('users').doc(id).get()
-  if( got.data()["Workshop"+WorkshopNumber] === 1){
 
+
+
+
+
+
+
+
+
+
+
+const isMarkedAttendance =  ( WorkshopNumber,currentUserData) => {
+
+  
+  if( currentUserData["Workshop"+WorkshopNumber] === 1){
+    
     return true
   }
   else{
     return false
   }
-
+  
 }
 const MarkAttendance =(id,WorkshopNumber) => {
   let obj ={}
@@ -28,15 +39,15 @@ const MarkAttendance =(id,WorkshopNumber) => {
   const db = firebase.firestore()
   db.collection('users').doc(id).update(
     obj
-  )
-
-
-}
-
-const showButtonText = async (id, WorkshopNumber) => {
-  const marked = await isMarkedAttendance(id, WorkshopNumber)
-  const btn =  document.getElementById(`btn-${WorkshopNumber}`)
-  const timeNow = await ServerTime()
+    )
+    
+    
+  }
+  
+  const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow) => {
+    const marked =  isMarkedAttendance( WorkshopNumber,currentUserData)
+    const btn =  document.getElementById(`btn-${WorkshopNumber}`)
+  
   const rightInterval = await InInterval(WorkshopNumber, timeNow)
   //debugger
 
@@ -62,26 +73,30 @@ const showButtonText = async (id, WorkshopNumber) => {
 
 }
 
-const showAllButtonsText = async(id) => {
+const showAllButtonsText = async(id, currentUserData, timeNow) => {
+  //const db = firebase.firestore()
+  //const currentUserData = await db.collection('users').doc(id).get()
+  //const timeNow = await ServerTime()
+  
   for(let i =1 ; i<=8; i++)
   {
-     showButtonText(id,i)
+    showButtonText(id,i, currentUserData, timeNow)
   }
 }
 
 const getDataByID = async (id) => {
-
+  
   if (id === undefined) {return null}
   const db = firebase.firestore()
   const userRef = await db.collection('users').doc(id).get()
   return userRef.data()
-
+  
 }
 
 
 
 
-export default  function User(){
+export default  function User(props){
   const router = useRouter()
   const [userRef, setuserRef] = useState(null)
   
@@ -94,10 +109,10 @@ export default  function User(){
       if (e) {
         e.returnValue = ''; // Legacy method for cross browser support
       }
-     //return 'Are you sure you want to leave?';
+      //return 'Are you sure you want to leave?';
     };
   },[])
-
+  
   useEffect( () => {
     if(!router.isReady) return;
     const getData = async () => {
@@ -118,6 +133,10 @@ export default  function User(){
 
   useEffect(() => {
     const buttons = document.getElementById('buttons')
+    //const db = firebase.firestore()
+    const currentUserData = props.currentUserData//await db.collection('users').doc(id).get()
+    const timeNow =  props.timeNow// await ServerTime()
+    //debugger
     if(buttons === null)
     {
       return
@@ -125,7 +144,7 @@ export default  function User(){
     buttons.innerHTML=''
     for(let i =1 ; i<=8; i++)
     {
- 
+      
       let newBtn = document.createElement('button')
       newBtn.disabled = true
       newBtn.id = `btn-${i}`
@@ -133,16 +152,21 @@ export default  function User(){
       newBtn.addEventListener ('click', async function(e){
         MarkAttendance(router.query.id,i)
         e.currentTarget.disabled = true
-        showButtonText(router.query.id,i)
+        //showButtonText(router.query.id,i)
+        showButtonText(ID,i, currentUserData, timeNow)
+        
       })
       
+      
       buttons.appendChild(newBtn)
+      showButtonText(ID,i, currentUserData, timeNow)
     }
-
-    document.onload = showAllButtonsText(router.query.id)
+    
+    //showAllButtonsText(router.query.id, currentUserData, timeNow)
     
   }, [router.isReady])
-  const ID = router.query.id
+  const ID = props.id
+  
   if(ID === undefined){
     return ( 
     <NotFound404/>
@@ -185,3 +209,17 @@ export default  function User(){
   
 }
   
+User.getInitialProps =  async (ctx) => {
+  //debugger
+  const  id  = ctx.query.id
+  const db = firebase.firestore()
+  const UserData = await db.collection('users').doc(id).get()
+  const timeNow = await ServerTime()
+  const currentUserData =  UserData.data()
+  
+  return { 
+     id : id,
+    currentUserData : currentUserData,
+    timeNow : timeNow
+  } 
+}

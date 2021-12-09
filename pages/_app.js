@@ -3,6 +3,7 @@ import Router from 'next/router'
 import {useState} from 'react'
 import Loader from '../components/Loader'
 import NProgress from 'nprogress'
+import App from 'next/app'
 //import getConfig from 'next/config';
 
 function MyApp({ Component, pageProps }) 
@@ -45,5 +46,11 @@ function MyApp({ Component, pageProps })
 
   )
 }
+/*
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext)
+  return { ...appProps }
+}
 
+*/
 export default MyApp
