@@ -39,7 +39,7 @@ export default function Index(){
 
               const searchResult = await SearchDatabase(form.email.value)
               if(searchResult ===  null){
-                alert('This email was used to register for this workshop. Please enter the correct email.')
+                alert('This email was not used to register for this workshop. Please enter the correct email.')
                 return
               }
               router.push({ pathname: './user', query:{id : searchResult.id}}, '/user')
