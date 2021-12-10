@@ -66,6 +66,15 @@ const MarkAttendance =(id,WorkshopNumber) => {
     //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
     return 
   }
+  
+  
+  else if(marked){
+    
+    btn.disabled = true
+    btn.innerHTML =''
+    btn.insertAdjacentHTML('afterbegin', `<p>Sucessfully Marked Attendance for Workshop ${WorkshopNumber}</p>` )
+    //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
+  }
   else if ( rightInterval ==1) {// too late
     btn.disabled = true
     btn.innerHTML =''
@@ -73,14 +82,6 @@ const MarkAttendance =(id,WorkshopNumber) => {
     //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
     return 
 
-  }
-  
-  if(marked){
-    
-    btn.disabled = true
-    btn.innerHTML =''
-    btn.insertAdjacentHTML('afterbegin', `<p>Sucessfully Marked Attendance for Workshop ${WorkshopNumber}</p>` )
-    //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
   }
   else{
     btn.disabled = false
