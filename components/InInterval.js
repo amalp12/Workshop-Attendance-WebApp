@@ -11,9 +11,15 @@ const InInterval = async (WorkshopNumber, currTime ) => {
     const currentTime = new Date(currTime);
     //debugger
     if(currentTime.getTime() >= startTime.getTime() && currentTime.getTime() <= endTime.getTime()){
-        return true;
+        return 0; // correct interval
     }
-    else{ return false;}
+    else if (currentTime.getTime() < startTime.getTime()){
+        return -1; // too early
+    }
+    else if (currentTime.getTime() > endTime.getTime()){
+        return 1; // too late
+
+    }
     
     
     /*

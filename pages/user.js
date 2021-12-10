@@ -44,33 +44,47 @@ const MarkAttendance =(id,WorkshopNumber) => {
     
   }
   
-  const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow) => {
-    const marked =  isMarkedAttendance( WorkshopNumber,currentUserData)
+  const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark) => {
+    
+    
+    const marked = mark ? true : isMarkedAttendance( WorkshopNumber,currentUserData)
+   
     const btn =  document.getElementById(`btn-${WorkshopNumber}`)
   
-  const rightInterval = await InInterval(WorkshopNumber, timeNow)
+  const rightInterval = await InInterval(WorkshopNumber, timeNow) // will be 0 in the right interval
   //debugger
 
   if (btn===null)
   {
     return
   }
-  if(rightInterval===false)
+  if(rightInterval===-1 ) // too early
   {
     btn.disabled = true
+    btn.innerHTML =''
     btn.insertAdjacentHTML('afterbegin',`<p>Workshop ${WorkshopNumber} has not started yet </p>`)
     //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
     return 
+  }
+  else if ( rightInterval ==1) {// too late
+    btn.disabled = true
+    btn.innerHTML =''
+    btn.insertAdjacentHTML('afterbegin',`<p>Workshop ${WorkshopNumber} has expired</p>`)
+    //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
+    return 
+
   }
   
   if(marked){
     
     btn.disabled = true
+    btn.innerHTML =''
     btn.insertAdjacentHTML('afterbegin', `<p>Sucessfully Marked Attendance for Workshop ${WorkshopNumber}</p>` )
     //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
   }
   else{
     btn.disabled = false
+    btn.innerHTML =''
     btn.insertAdjacentHTML('afterbegin',`<p>Click Here to Mark Attendance for Workshop ${WorkshopNumber}</p>`)
     //btn.innerHTML =  `Click Here to Mark Attendance for Workshop ${WorkshopNumber}`
   }
@@ -157,13 +171,13 @@ export default  function User(props){
         MarkAttendance(router.query.id,i)
         e.currentTarget.disabled = true
         //showButtonText(router.query.id,i)
-        showButtonText(ID,i, currentUserData, timeNow)
+        showButtonText(ID,i, currentUserData, timeNow, true)
         
       })
       
       
       buttons.appendChild(newBtn)
-      showButtonText(ID,i, currentUserData, timeNow)
+      showButtonText(ID,i, currentUserData, timeNow, false)
     }
     
     //showAllButtonsText(router.query.id, currentUserData, timeNow)
