@@ -1,10 +1,9 @@
-import firebase from 'firebase/app'
-import   'firebase/firestore'
+import myfirebase from '../components/firebase/initializeFirebase'
 //import timeData from '../private/timeData.json'
 import SearchDatabase from './SearchDatabase'
 
 const AddWorkshopTimes = async () => {
-    const db = firebase.firestore();
+    const db = myfirebase(true);
     const docRef =  db.collection('times');
     let condition
    for(var key in timeData){

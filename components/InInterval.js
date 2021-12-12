@@ -1,9 +1,7 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-
+import myfirebase from '../components/firebase/initializeFirebase'
 
 const InInterval = async (WorkshopNumber, currTime ) => {
-    const db = firebase.firestore();
+    const db = myfirebase(true);
     const docRef = await db.collection('times').doc(`Workshop${WorkshopNumber}`).get();
     
     const startTime = new Date(docRef.data().Start);

@@ -1,8 +1,5 @@
 import myfirebase from '../components/firebase/initializeFirebase'
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
 
 
 const  SearchDatabase = async (email) =>{
@@ -11,7 +8,8 @@ const  SearchDatabase = async (email) =>{
     //email should be a string
     //console.log(db) 
     // async function to search for user in database
-    let searchResult = await db.collection('users').get().then(
+    let searchResult =  null
+    searchResult = await db.collection('users').get().then(
         (snapshot) => {
         // the below searchResult is a different varialbe than the one above
         let searchResult = null
@@ -24,7 +22,7 @@ const  SearchDatabase = async (email) =>{
             if(typeof doc.data().Email != "undefined"){
                 // makeing sure it has no white space
                 if(doc.data().Email.replace(/\s/g, '') === email.replace(/\s/g, '')){
-                    console.log("found")
+                    //console.log("found")
                     searchResult =  doc
                     return false
                 }
