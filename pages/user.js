@@ -33,7 +33,7 @@ const isMarkedAttendance =  ( WorkshopNumber,currentUserData) => {
   }
   
 }
-const MarkAttendance = async (id,WorkshopNumber) => {
+const MarkAttendance = async (id,WorkshopNumber, timeNow) => {
   const rightInterval = await InInterval(WorkshopNumber, timeNow) // will be 0 in the right interval
  
   if (rightInterval===0 ) 
@@ -85,16 +85,13 @@ const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark
     //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
   }
   else if ( rightInterval ==1) {// too late
-    const marked = await MarkAttendance(id,WorkshopNumber)
-    if(marked === true)
-    {
+  
       btn.disabled = true
       btn.innerHTML =''
       btn.insertAdjacentHTML('afterbegin',`<p>Workshop ${WorkshopNumber} has expired</p>`)
       //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
       return
-    }
-    else {return} 
+    
 
   }
   else{
@@ -183,7 +180,7 @@ export default  function User(props){
       newBtn.id = `btn-${i}`
       newBtn.className = "btn btn-primary"
       newBtn.addEventListener ('click', async function(e){
-        
+        MarkAttendance(router.query.id,i, timeNow)
         e.currentTarget.disabled = true
         //showButtonText(router.query.id,i)
         showButtonText(ID,i, currentUserData, timeNow, true)
