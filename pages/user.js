@@ -13,7 +13,7 @@ import initializeFirebase from "../components/firebase/initializeFirebase";
 
 
 
-const NUMBER_OF_WORKSHOPS = 9
+const NUMBER_OF_WORKSHOPS = 8
 
 
 
