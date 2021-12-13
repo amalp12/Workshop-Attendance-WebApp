@@ -37,19 +37,19 @@ const addAllIfDoesntExist = async (jsonData) => {
 
 export default function Admin(){
 
+    /*
+    <div className={styles['main-container']}>
+      <h1 className={styles['title-container']} >Admin  </h1>
+        <button disabled = {true} onClick={async()=>{await addAllIfDoesntExist(data)}}>Add all to Database</button>
+        <button disabled = {true} onClick={()=>{
+            const time = ServerTime()
+            //console.log(time)
+            }}>Get Server Time</button>
+        <button disabled = {true} onClick={async ()=>{ await AddWorkshopTimes() }}>Add Workshop Times</button>
+    
+    </div>
+*/
     return(
-        /*
-        <div className={styles['main-container']}>
-          <h1 className={styles['title-container']} >Admin  </h1>
-            <button disabled = {true} onClick={async()=>{await addAllIfDoesntExist(data)}}>Add all to Database</button>
-            <button disabled = {true} onClick={()=>{
-                const time = ServerTime()
-                //console.log(time)
-                }}>Get Server Time</button>
-            <button disabled = {true} onClick={async ()=>{ await AddWorkshopTimes() }}>Add Workshop Times</button>
-        
-        </div>
-    */
     <div className={styles['main-container']}>
         Psst... You can't see this.
     </div>
