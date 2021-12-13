@@ -51,7 +51,7 @@ export default function Admin(){
 */
     return(
     <div className={styles['main-container']}>
-        Psst... You can't see this.
+        Psst... You are not allowed to see this.
     </div>
       )
   
