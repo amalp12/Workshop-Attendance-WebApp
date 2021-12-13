@@ -13,7 +13,7 @@ import initializeFirebase from "../components/firebase/initializeFirebase";
 
 
 
-
+const NUMBER_OF_WORKSHOPS = 9
 
 
 
@@ -46,11 +46,9 @@ const MarkAttendance = async (id,WorkshopNumber, timeNow) => {
     db.collection('users').doc(id).update(
       obj
       )
-    return true
+    
   } 
-  else{
-    return false
-  }
+ 
 }
   
 const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark) => {
@@ -83,6 +81,7 @@ const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark
     btn.innerHTML =''
     btn.insertAdjacentHTML('afterbegin', `<p>Sucessfully Marked Attendance for Workshop ${WorkshopNumber}</p>` )
     //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
+    return
   }
   else if ( rightInterval ==1) {// too late
   
@@ -99,10 +98,11 @@ const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark
     btn.innerHTML =''
     btn.insertAdjacentHTML('afterbegin',`<p>Click Here to Mark Attendance for Workshop ${WorkshopNumber}</p>`)
     //btn.innerHTML =  `Click Here to Mark Attendance for Workshop ${WorkshopNumber}`
+    return
   }
 
 }
-
+/*
 const showAllButtonsText = async(id, currentUserData, timeNow) => {
   //const db = firebase.firestore()
   //const currentUserData = await db.collection('users').doc(id).get()
@@ -113,7 +113,7 @@ const showAllButtonsText = async(id, currentUserData, timeNow) => {
     showButtonText(id,i, currentUserData, timeNow)
   }
 }
-
+*/
 const getDataByID = async (id) => {
   
   if (id === undefined) {return null}
@@ -172,7 +172,7 @@ export default  function User(props){
       return
     }
     buttons.innerHTML=''
-    for(let i =1 ; i<=8; i++)
+    for(let i =1 ; i<= NUMBER_OF_WORKSHOPS; i++)
     {
       
       let newBtn = document.createElement('button')
