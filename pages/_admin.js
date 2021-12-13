@@ -1,4 +1,4 @@
-/*
+
 import styles from '../styles/admin.module.css'
 //import data from '../private/data.json'
 import myfirebase from '../components/firebase/initializeFirebase'
@@ -38,7 +38,7 @@ const addAllIfDoesntExist = async (jsonData) => {
 export default function Admin(){
 
     return(
-  
+        /*
         <div className={styles['main-container']}>
           <h1 className={styles['title-container']} >Admin  </h1>
             <button disabled = {true} onClick={async()=>{await addAllIfDoesntExist(data)}}>Add all to Database</button>
@@ -49,6 +49,10 @@ export default function Admin(){
             <button disabled = {true} onClick={async ()=>{ await AddWorkshopTimes() }}>Add Workshop Times</button>
         
         </div>
+    */
+    <div className={styles['main-container']}>
+        Psst... You can't see this.
+    </div>
       )
   
   
@@ -57,4 +61,4 @@ export default function Admin(){
 
 
   
-  */
+  
