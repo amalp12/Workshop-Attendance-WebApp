@@ -1,4 +1,4 @@
-
+/*
 import styles from '../styles/admin.module.css'
 //import data from '../private/data.json'
 import myfirebase from '../components/firebase/initializeFirebase'
@@ -36,13 +36,6 @@ const addAllIfDoesntExist = async (jsonData) => {
 
 
 export default function Admin(){
-    //console.log(data)
-    /*
-    useEffect(async ()=>{
-        await addAllIfDoesntExist(data);
-    },[])
-    */
-   // enable disabled buttons to use
 
     return(
   
@@ -62,19 +55,6 @@ export default function Admin(){
   }
 
 
-  /*
-  
-1  Introduction to sequential
- modelling-RNNs and LSTMs
-3 Transformers
-BERT
-Use case of Transformer
-Hands on BERT with PyTorch
-Autoregressive models
-Transformers for vision and
-speech
-Simplified VQ-GAN hands-on
-DAY 1 (0930-1600 HRS)
-1.
+
   
   */
