@@ -33,18 +33,27 @@ const isMarkedAttendance =  ( WorkshopNumber,currentUserData) => {
   }
   
 }
-const MarkAttendance =(id,WorkshopNumber) => {
-  let obj ={}
-  obj["Workshop"+WorkshopNumber] = 1
-  const db = initializeFirebase(true)
-  db.collection('users').doc(id).update(
-    obj
-    )
-    
-    
-  }
+const MarkAttendance = async (id,WorkshopNumber) => {
+  const rightInterval = await InInterval(WorkshopNumber, timeNow) // will be 0 in the right interval
+ 
+  if (rightInterval===0 ) 
+  {
+     
   
-  const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark) => {
+    let obj ={}
+    obj["Workshop"+WorkshopNumber] = 1
+    const db = initializeFirebase(true)
+    db.collection('users').doc(id).update(
+      obj
+      )
+    return true
+  } 
+  else{
+    return false
+  }
+}
+  
+const showButtonText = async (id, WorkshopNumber, currentUserData, timeNow, mark) => {
     
     
     const marked = mark ? true : isMarkedAttendance( WorkshopNumber,currentUserData)
@@ -76,11 +85,16 @@ const MarkAttendance =(id,WorkshopNumber) => {
     //btn.innerHTML = `Sucessfully Marked Attendance for Workshop ${WorkshopNumber}` 
   }
   else if ( rightInterval ==1) {// too late
-    btn.disabled = true
-    btn.innerHTML =''
-    btn.insertAdjacentHTML('afterbegin',`<p>Workshop ${WorkshopNumber} has expired</p>`)
-    //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
-    return 
+    const marked = await MarkAttendance(id,WorkshopNumber)
+    if(marked === true)
+    {
+      btn.disabled = true
+      btn.innerHTML =''
+      btn.insertAdjacentHTML('afterbegin',`<p>Workshop ${WorkshopNumber} has expired</p>`)
+      //btn.innerHTML = `Workshop ${WorkshopNumber} has not started yet`
+      return
+    }
+    else {return} 
 
   }
   else{
@@ -169,7 +183,7 @@ export default  function User(props){
       newBtn.id = `btn-${i}`
       newBtn.className = "btn btn-primary"
       newBtn.addEventListener ('click', async function(e){
-        MarkAttendance(router.query.id,i)
+        
         e.currentTarget.disabled = true
         //showButtonText(router.query.id,i)
         showButtonText(ID,i, currentUserData, timeNow, true)
